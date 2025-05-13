@@ -11,12 +11,24 @@ public class ShipForces : MonoBehaviour
     [SerializeField] ShipForce BL;
     [SerializeField] ShipForce BR;
 
+    [Header("Gravity")]
+    public Vector3 gravityDirection;
+    [SerializeField] float gravityRaycastDistance = 20;
+
+
     public LayerMask roadLayer;
 
 
 
     void Update()
     {
+        Ray ray = new Ray(transform.position, -transform.up);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, gravityRaycastDistance, roadLayer))
+        {
+            gravityDirection = hit.normal;
+        }
+
         Suspension();
     }
 

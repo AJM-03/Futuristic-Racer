@@ -38,7 +38,7 @@ public class ShipForce : MonoBehaviour
         }
         Debug.Log(force);
 
-        float currentGravity = gravity / 1000;
+        float currentGravity = Vector3.Dot(shipForces.gravityDirection, new Vector3(0, gravity / 1000, 0));
         force += currentGravity;
 
         shipForces.shipRb.AddForceAtPosition(springDir * force, transform.position);  // Apply the force at this point
